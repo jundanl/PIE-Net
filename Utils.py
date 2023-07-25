@@ -150,7 +150,12 @@ class mor_utils:
             for k, ele in preds.items():
                 pred = ele.cpu().detach().clone().numpy()
                 pred[pred < 0] = 0
-                pred = (pred / pred.max()) * 255
                 pred = pred.transpose((1, 2, 0))
+                if pred.shape[2] == 1:
+                    pred = pred[:, :, 0]  # Remove the extra dimension
+                # save raw output
+                np.save((vis + '/%s_%s.npy') % (filename, k), pred)
+                # save visualized image
+                pred = (pred / pred.max()) * 255
                 pred = pred.astype(np.uint8)
                 imageio.imwrite((vis + '/%s_%s.png') % (filename, k), pred)

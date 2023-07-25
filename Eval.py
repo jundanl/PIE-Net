@@ -31,12 +31,12 @@ else:
     print('[*] GPU Device %s selected as default execution device.' %
           cudaDevice)
 
-visuals = 'test_outputs/'
+visuals = 'test_outputs/iiw_dataset'
 os.makedirs(visuals, exist_ok=True)
 
 modelSaveLoc = 'model/real_world_model.t7'
 
-data_root = '/home/pdas/Experiments/TrimBot/test_around_garden/uvc_camera_cam_0/'
+data_root = 'data/iiw_dataset/'
 query_fmt = 'png'
 
 batch_size = 1
