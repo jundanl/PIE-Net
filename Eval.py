@@ -32,12 +32,14 @@ else:
     print('[*] GPU Device %s selected as default execution device.' %
           cudaDevice)
 
-visuals = 'test_outputs/iiw_dataset'
+# visuals = 'out/iiw_test_high_resolution'
+visuals = 'out/ARAP'
 os.makedirs(visuals, exist_ok=True)
 
 modelSaveLoc = 'model/real_world_model.t7'
 
-data_root = 'data/iiw_dataset/'
+# data_root = 'data/iiw_test_data/high_resolution/'
+data_root = 'data/ARAP/input/'
 query_fmt = 'png'
 
 batch_size = 1
@@ -61,7 +63,11 @@ def readFile(name):
     im = imageio.imread(name)
     rgb = im.astype(np.float32)
     rgb[np.isnan(rgb)] = 0
-    rgb = cv2.resize(rgb, (256, 256))
+    h, w = rgb.shape[:2]
+    s = 1024 / max(h, w)
+    t_h = math.ceil(h * s / 32) * 32
+    t_w = math.ceil(w * s / 32) * 32
+    rgb = cv2.resize(rgb, (t_w, t_h))
     rgb = rgb / 255
 
     rgb = rgb.transpose((2, 0, 1))
