@@ -32,12 +32,12 @@ else:
     print('[*] GPU Device %s selected as default execution device.' %
           cudaDevice)
 
-visuals = 'test_outputs/iiw_dataset'
+visuals = 'test_outputs/iiw_test_low_resolution'
 os.makedirs(visuals, exist_ok=True)
 
 modelSaveLoc = 'model/real_world_model.t7'
 
-data_root = 'data/iiw_dataset/'
+data_root = 'data/iiw_test_data/low_resolution/'
 query_fmt = 'png'
 
 batch_size = 1
