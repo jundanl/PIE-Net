@@ -1,5 +1,6 @@
 import os
 import time
+import math
 
 from tqdm import tqdm
 import numpy as np
@@ -70,7 +71,7 @@ def Eval(net):
     net.eval()
 
     files = glob.glob(data_root + '*.%s' % query_fmt)
-    print('Found %d files at query location' % len(files))
+    print('Found %d files at query location %s' % (len(files), data_root))
 
     for data in tqdm(files):
 
